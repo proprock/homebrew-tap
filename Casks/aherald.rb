@@ -13,20 +13,19 @@ cask "aherald" do
   end
 
   depends_on arch: :arm64
-  depends_on macos: ">= :big_sur"
+  depends_on macos: :big_sur
 
   app "aHerald.app"
 
-  # Homebrew runs as the user who owns the agent hooks, so aHerald's own entries can be removed
+  # Homebrew runs as the user who owns the agent hooks, so aHerald's own entries are removed
   # here, before the program is deleted. A failure stops the uninstall and shows its message;
   # see the README for the repair path.
-  uninstall_preflight do
-    system_command "#{appdir}/aHerald.app/Contents/MacOS/aherald",
-                   args:         ["--unsetup", "--apply"],
-                   must_succeed: true
-  end
-
-  uninstall quit: "io.github.proprock.aherald"
+  uninstall quit:   "io.github.proprock.aherald",
+            script: {
+              executable:   "#{appdir}/aHerald.app/Contents/MacOS/aherald",
+              args:         ["--unsetup", "--apply"],
+              must_succeed: true,
+            }
 
   # Configuration, logs and the setup receipt; hooks are handled by the preflight above.
   zap trash: "~/Library/Application Support/aHerald"
