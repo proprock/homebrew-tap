@@ -39,6 +39,8 @@ cask "aherald" do
     aHerald is ad-hoc signed only, not notarized. The first start of the downloaded app is
     blocked by Gatekeeper. Try to open aHerald.app once, then choose Open Anyway in System Settings,
     Privacy & Security (macOS 15 and later; a right-click, Open no longer works).
+    Or remove the quarantine mark directly:
+      xattr -dr com.apple.quarantine /Applications/aHerald.app
     Then pick Codex and/or Claude Code in the setup window and press Apply.
   EOS
 end
