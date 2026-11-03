@@ -1,0 +1,20 @@
+name: CI
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Audit and style-check the casks
+        run: |
+          brew tap-new --no-git local/test
+          mkdir -p "$(brew --repository local/test)/Casks"
+          cp Casks/*.rb "$(brew --repository local/test)/Casks/"
+          for cask in Casks/*.rb; do
+            name="$(basename "$cask" .rb)"
+            brew style --cask "local/test/$name"
+          done
