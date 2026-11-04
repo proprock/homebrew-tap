@@ -1,6 +1,6 @@
 cask "aherald" do
-  version "0.11.0"
-  sha256 "b53e566aae950bcd4d447b108622566c98ee30b0c0b0fc841642640fc4c56e1e"
+  version "0.12.0"
+  sha256 "71b5bf6a7572c79ff496b9a20a9ddfd1a44ccfe9f02033e280886d50b578dfcf"
 
   url "https://github.com/proprock/aHerald/releases/download/v#{version}/aherald-v#{version}-macos-arm64.dmg"
   name "aHerald"
